@@ -104,7 +104,7 @@ public class LoginView extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/logo-citra-no-bg.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/pelatihan.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
