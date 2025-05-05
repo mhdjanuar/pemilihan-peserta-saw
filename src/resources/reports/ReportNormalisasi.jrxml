@@ -83,6 +83,7 @@ ORDER BY p.nama, c.id;]]>
 		</field>
 	</subDataset>
 	<parameter name="PATH" class="java.lang.String"/>
+	<parameter name="Parameter1" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select * from pemilihan_peserta_saw.users limit 1]]>
 	</queryString>
@@ -122,9 +123,9 @@ ORDER BY p.nama, c.id;]]>
 	<pageHeader>
 		<band height="80" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="100" forecolor="#FFFCFC" backcolor="#080808" uuid="e4bb0ff4-161b-4c60-8654-48476e94bec1"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="100" forecolor="#FFFCFC" backcolor="#080808" uuid="6d62d133-aa85-4edd-8962-7bea8f7fc6be"/>
 				<staticText>
-					<reportElement x="110" y="10" width="350" height="30" forecolor="#FCFAFA" uuid="7b997828-5922-479f-a901-e46e8a735de3"/>
+					<reportElement x="110" y="10" width="350" height="30" forecolor="#FCFAFA" uuid="89632a20-2811-400d-96b9-713c17572658"/>
 					<textElement textAlignment="Center">
 						<font fontName="Times New Roman" size="20" isBold="true"/>
 						<paragraph lineSpacingSize="1.0"/>
@@ -132,15 +133,15 @@ ORDER BY p.nama, c.id;]]>
 					<text><![CDATA[JULIANA JAYA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="190" y="40" width="221" height="20" forecolor="#FFFAFA" uuid="6d1c7d8e-999b-445b-baca-4d8bebbe672c"/>
+					<reportElement x="142" y="40" width="310" height="20" forecolor="#FFFAFA" uuid="33ba0ff6-8823-4c1a-a125-cf033d49fc09"/>
 					<textElement>
 						<font fontName="Times New Roman"/>
 					</textElement>
-					<text><![CDATA[ Jl. Prof. DR. Soepomo No.143, RT.13/RW.2]]></text>
+					<text><![CDATA[Jl. Raya Bogor Cililitan No.20, RT.1/RW.15, Cililitan, Kec. Kramat jati]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="210" y="60" width="170" height="20" forecolor="#FCFAFA" uuid="ed59f245-3317-4591-8f90-c69ef179e920"/>
-					<text><![CDATA[Kec. Tebet, Kota Jakarta Selatan]]></text>
+					<reportElement x="153" y="60" width="267" height="20" forecolor="#FCFAFA" uuid="9feb8735-d702-4d18-a8f3-49078bcba476"/>
+					<text><![CDATA[Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13640]]></text>
 				</staticText>
 				<image>
 					<reportElement x="40" y="25" width="50" height="50" uuid="23d5bb3f-e081-4190-9f1d-1a95495589ee"/>

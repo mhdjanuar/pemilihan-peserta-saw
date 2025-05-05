@@ -75,8 +75,7 @@ JOIN (
 ) AS total_weight
 
 GROUP BY p.nama
-ORDER BY total_nilai DESC;
-]]>
+ORDER BY total_nilai DESC;]]>
 		</queryString>
 		<field name="nama_pelanggan" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.name" value="nama"/>
@@ -142,15 +141,15 @@ ORDER BY total_nilai DESC;
 					<text><![CDATA[JULIANA JAYA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="190" y="40" width="221" height="20" forecolor="#FFFAFA" uuid="e702c6a7-60b3-455d-a624-de057627a8d4"/>
+					<reportElement x="142" y="40" width="310" height="20" forecolor="#FFFAFA" uuid="e702c6a7-60b3-455d-a624-de057627a8d4"/>
 					<textElement>
 						<font fontName="Times New Roman"/>
 					</textElement>
-					<text><![CDATA[ Jl. Prof. DR. Soepomo No.143, RT.13/RW.2]]></text>
+					<text><![CDATA[Jl. Raya Bogor Cililitan No.20, RT.1/RW.15, Cililitan, Kec. Kramat jati]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="210" y="60" width="170" height="20" forecolor="#FCFAFA" uuid="91ee8aa4-c74c-4263-a8bb-122ef1c37633"/>
-					<text><![CDATA[Kec. Tebet, Kota Jakarta Selatan]]></text>
+					<reportElement x="153" y="60" width="267" height="20" forecolor="#FCFAFA" uuid="91ee8aa4-c74c-4263-a8bb-122ef1c37633"/>
+					<text><![CDATA[Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13640]]></text>
 				</staticText>
 				<image>
 					<reportElement x="40" y="25" width="50" height="50" uuid="23d5bb3f-e081-4190-9f1d-1a95495589ee"/>
