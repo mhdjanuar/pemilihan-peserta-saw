@@ -121,47 +121,47 @@ public class AlternatifView extends javax.swing.JPanel {
       int maxRow = 4;
       int row = 0;
       int col = 0;
+      int maxUsedRow = 0;
 
       List<AlternatifModel> alternatifList = new ArrayList<>();
 
       // === Kriteria dan Subkriteria ===
-      for (CriteriaModel criteria : criteriaList) {
-          JLabel label = new JLabel(criteria.getName() + ": ");
-          label.setFont(new Font("Arial", Font.BOLD, 14));
+        for (CriteriaModel criteria : criteriaList) {
+            JLabel label = new JLabel(criteria.getName() + ": ");
+            label.setFont(new Font("Arial", Font.BOLD, 14));
 
-          JComboBox<ComboBoxItem> comboBox = new JComboBox<>();
-          comboBox.setMaximumSize(new Dimension(300, 30));
-          comboBox.setFont(new Font("Arial", Font.PLAIN, 12));
+            JComboBox<ComboBoxItem> comboBox = new JComboBox<>();
+            comboBox.setMaximumSize(new Dimension(300, 30));
+            comboBox.setFont(new Font("Arial", Font.PLAIN, 12));
 
-          List<SubCriteriaModel> subCriteriaList = subCriteriaDao.findAllByCriteriaId(criteria.getId());
-          for (SubCriteriaModel subCriteria : subCriteriaList) {
-              comboBox.addItem(new ComboBoxItem(subCriteria.getDeskripsi(), subCriteria.getId()));
-          }
+            List<SubCriteriaModel> subCriteriaList = subCriteriaDao.findAllByCriteriaId(criteria.getId());
+            for (SubCriteriaModel subCriteria : subCriteriaList) {
+                comboBox.addItem(new ComboBoxItem(subCriteria.getDeskripsi(), subCriteria.getId()));
+            }
 
-          comboBoxes.add(comboBox);
+            comboBoxes.add(comboBox);
 
-          gbc.gridx = col * 2;
-          gbc.gridy = row + 2; // Mulai dari baris ke-2 karena baris 0 dan 1 dipakai pelanggan
-          jPanel1.add(label, gbc);
+            gbc.gridx = col * 2;
+            gbc.gridy = row + 2;
+            jPanel1.add(label, gbc);
 
-          gbc.gridx = col * 2 + 1;
-          jPanel1.add(comboBox, gbc);
+            gbc.gridx = col * 2 + 1;
+            jPanel1.add(comboBox, gbc);
 
-          row++;
-          if (row >= maxRow) {
-              row = 0;
-              col++;
-          }
-      }
+            maxUsedRow = Math.max(maxUsedRow, gbc.gridy);
 
+            row++;
+            if (row >= maxRow) {
+                row = 0;
+                col++;
+            }
+        }
       // === Tombol ===
       JPanel buttonPanel = new JPanel();
       buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
       buttonPanel.setBackground(Color.WHITE);
 
       JButton simpanButton = new JButton("Simpan");
-      JButton ubahButton = new JButton("Ubah");
-      JButton resetButton = new JButton("Reset");
 
       simpanButton.addActionListener(e -> {
           ComboBoxItem selectedPelanggan = (ComboBoxItem) pelangganComboBox.getSelectedItem();
@@ -199,11 +199,11 @@ public class AlternatifView extends javax.swing.JPanel {
 
       buttonPanel.add(simpanButton);
 
-      gbc.gridx = 0;
-      gbc.gridy = row + 3;
-      gbc.gridwidth = 4;
-      gbc.anchor = GridBagConstraints.WEST;
-      jPanel1.add(buttonPanel, gbc);
+     gbc.gridx = 0;
+     gbc.gridy = maxUsedRow + 1;
+     gbc.gridwidth = 4;
+     gbc.anchor = GridBagConstraints.WEST;
+     jPanel1.add(buttonPanel, gbc);
   }
 
 
