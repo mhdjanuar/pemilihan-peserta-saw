@@ -10,11 +10,24 @@ import application.daoimpl.CriteriaDaoImpl;
 import application.daoimpl.SubCriteriaDaoImpl;
 import application.models.CriteriaModel;
 import application.models.SubCriteriaModel;
+import application.utils.DatabaseUtil;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -119,6 +132,7 @@ public class SubCriteriaView extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -164,6 +178,13 @@ public class SubCriteriaView extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("CETAK LAPORAN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -185,7 +206,9 @@ public class SubCriteriaView extends javax.swing.JPanel {
                         .addComponent(jButton4))
                     .addComponent(jTextFieldBobot)
                     .addComponent(jScrollPane1))
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +216,8 @@ public class SubCriteriaView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -352,8 +376,30 @@ public class SubCriteriaView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         try {
+            String templateName = "LaporanSubKriteria.jrxml";
+            InputStream reportStream = ReportView.class.getResourceAsStream("/resources/reports/" + templateName);
+            JasperDesign jd = JRXmlLoader.load(reportStream);
+
+            Connection dbConnection = DatabaseUtil.getInstance().getConnection();
+
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+
+            HashMap parameter = new HashMap();
+            parameter.put("PATH","src/resources/images/");
+            
+            JasperPrint jp = JasperFillManager.fillReport(jr,parameter, dbConnection);
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException ex) {
+            Logger.getLogger(ReportView.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
