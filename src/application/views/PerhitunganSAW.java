@@ -40,7 +40,7 @@ public class PerhitunganSAW extends javax.swing.JPanel {
 
         // Buat model tabel dengan kolom: Nama Pelanggan, Nama Kriteria, Nilai Normalisasi
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"Nama Pelanggan", "Nama Kriteria", "Nilai Normalisasi"});
+        model.setColumnIdentifiers(new Object[]{"Nama Peserta", "Nama Kriteria", "Nilai Normalisasi"});
 
         // Isi tabel dengan data
         for (AlternatifModel alternatif : normalisasiList) {
