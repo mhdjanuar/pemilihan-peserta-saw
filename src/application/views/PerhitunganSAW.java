@@ -160,7 +160,7 @@ public class PerhitunganSAW extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("RANGKING");
+        jLabel2.setText("RANKING");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
