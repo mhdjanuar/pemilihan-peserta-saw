@@ -263,17 +263,17 @@
 				<textFieldExpression><![CDATA["Jakarta, " + new java.text.SimpleDateFormat("EEEE, dd MMMM yyyy", new java.util.Locale("id", "ID")).format(new java.util.Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-18" y="50" width="588" height="19" uuid="f0ced513-a1fd-4151-989f-a5e088d9ace2">
+				<reportElement x="460" y="50" width="124" height="19" uuid="f0ced513-a1fd-4151-989f-a5e088d9ace2">
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Right">
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 					<paragraph rightIndent="40"/>
 				</textElement>
-				<text><![CDATA[HRD]]></text>
+				<text><![CDATA[Kepala Cabang]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-10" y="130" width="567" height="24" uuid="0f33c143-b6c6-48b7-90cd-5a576099e461">
+				<reportElement x="470" y="130" width="67" height="24" uuid="0f33c143-b6c6-48b7-90cd-5a576099e461">
 					<property name="com.jaspersoft.studio.unit.spacingBefore" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 				</reportElement>

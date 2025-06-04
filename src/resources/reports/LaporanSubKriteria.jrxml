@@ -284,7 +284,7 @@
 	<columnFooter>
 		<band height="154" splitType="Stretch">
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="-20" y="20" width="594" height="19" uuid="25d105f4-2978-4632-b92c-42d40d9cfd9f">
+				<reportElement x="-20" y="20" width="594" height="19" uuid="8cb9f943-9650-46e5-8035-a39e46cf3002">
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right">
@@ -293,17 +293,17 @@
 				<textFieldExpression><![CDATA["Jakarta, " + new java.text.SimpleDateFormat("EEEE, dd MMMM yyyy", new java.util.Locale("id", "ID")).format(new java.util.Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-18" y="50" width="588" height="19" uuid="d6ca43a9-e812-4754-b76b-94d101c5c19b">
+				<reportElement x="460" y="50" width="124" height="19" uuid="f0ced513-a1fd-4151-989f-a5e088d9ace2">
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Right">
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 					<paragraph rightIndent="40"/>
 				</textElement>
-				<text><![CDATA[HRD]]></text>
+				<text><![CDATA[Kepala Cabang]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-10" y="130" width="567" height="24" uuid="0f33c143-b6c6-48b7-90cd-5a576099e461">
+				<reportElement x="470" y="130" width="67" height="24" uuid="0f33c143-b6c6-48b7-90cd-5a576099e461">
 					<property name="com.jaspersoft.studio.unit.spacingBefore" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 				</reportElement>
