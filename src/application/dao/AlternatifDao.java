@@ -15,4 +15,5 @@ public interface AlternatifDao {
      public List<AlternatifModel> findAll();
      public int create(List<AlternatifModel> alternatifList);
      public List<AlternatifModel> findNormalisasi();
+     public int deleteBulkByPeserta(int idPeserta);
 }

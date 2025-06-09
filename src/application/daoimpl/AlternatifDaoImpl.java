@@ -38,7 +38,7 @@ public class AlternatifDaoImpl implements AlternatifDao {
         
         try {
             query = "SELECT p.nama, c.id AS id_kriteria, c.nama AS nama_kriteria, " +
-                "sc.jumlah_bobot AS bobot_alternatif " +
+                "sc.jumlah_bobot AS bobot_alternatif, sc.deskripsi as desc_sub_kriteria " +
                 "FROM alternatif AS a " +
                 "INNER JOIN peserta AS p ON a.id_peserta = p.id " +
                 "INNER JOIN sub_criteria AS sc ON a.id_sub_kreteria = sc.id " +
@@ -53,6 +53,7 @@ public class AlternatifDaoImpl implements AlternatifDao {
                 alternatif.setIdKriteria(resultSet.getInt("id_kriteria"));
                 alternatif.setNameKriteria(resultSet.getString("nama_kriteria"));
                 alternatif.setBobotAlternatif(resultSet.getInt("bobot_alternatif"));
+                alternatif.setDescSubKriteria(resultSet.getString("desc_sub_kriteria"));
                 // Set other attributes accordingly
                 alternatifList.add(alternatif);
             }
@@ -178,5 +179,23 @@ public class AlternatifDaoImpl implements AlternatifDao {
 
         return normalisasiList;
     }
+
+    @Override
+   public int deleteBulkByPeserta(int idPeserta) {
+        String query = "DELETE FROM alternatif WHERE id_peserta = ?";
+
+        try (PreparedStatement pstmt = dbConnection.prepareStatement(query)) {
+            pstmt.setInt(1, idPeserta);
+            return pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Gagal menghapus data alternatif: " + e.getMessage());
+            throw new RuntimeException("Database error saat menghapus alternatif.", e);
+        } finally {
+            closeStatement();
+        }
+
+    }
+
 
 }

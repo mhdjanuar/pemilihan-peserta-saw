@@ -250,7 +250,7 @@ public class MenuView extends javax.swing.JFrame {
 
         alternatif.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         alternatif.setForeground(new java.awt.Color(255, 255, 255));
-        alternatif.setText("      DATA ALTERNATIF");
+        alternatif.setText("      DATA PENILAIAN");
         alternatif.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 alternatifMouseClicked(evt);

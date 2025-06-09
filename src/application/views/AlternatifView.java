@@ -53,13 +53,14 @@ public class AlternatifView extends javax.swing.JPanel {
 
         // Membuat model untuk jTable1 dengan kolom-kolom yang sesuai
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"Nama Peserta", "Nama Kriteria", "Bobot Alternatif"}); // Menentukan nama kolom
+        model.setColumnIdentifiers(new Object[]{"Nama Peserta", "Nama Kriteria", "Nama Sub Kriteria", "Bobot Alternatif"}); // Menentukan nama kolom
 
         // Mengisi model dengan data dari alternatifList
         for (AlternatifModel alternatif : alternatifList) {
             model.addRow(new Object[]{
                 alternatif.getNameAlternatif(), // Nama Pelanggan
                 alternatif.getNameKriteria(),   // Nama Kriteria
+                alternatif.getDescSubKriteria(),
                 alternatif.getBobotAlternatif(), // Bobot Alternatif
             });
         }
@@ -162,11 +163,13 @@ public class AlternatifView extends javax.swing.JPanel {
       buttonPanel.setBackground(Color.WHITE);
 
       JButton simpanButton = new JButton("Simpan");
+      JButton editButton = new JButton("Ubah");
+      JButton hapusButton = new JButton("Hapus");
 
       simpanButton.addActionListener(e -> {
           ComboBoxItem selectedPelanggan = (ComboBoxItem) pelangganComboBox.getSelectedItem();
           if (selectedPelanggan == null || selectedPelanggan.getId() == -1) {
-              JOptionPane.showMessageDialog(this, "Pilih pelanggan terlebih dahulu.", "Error", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(this, "Pilih peserta terlebih dahulu.", "Error", JOptionPane.ERROR_MESSAGE);
               return;
           }
 
@@ -195,9 +198,62 @@ public class AlternatifView extends javax.swing.JPanel {
           JOptionPane.showMessageDialog(this, rowsInserted + " data berhasil disimpan.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
           getAllData();
       });
+      
+      // ✅ Tombol Ubah
+        editButton.addActionListener(e -> {
+            ComboBoxItem selectedPelanggan = (ComboBoxItem) pelangganComboBox.getSelectedItem();
+            if (selectedPelanggan == null || selectedPelanggan.getId() == -1) {
+                JOptionPane.showMessageDialog(this, "Pilih peserta terlebih dahulu.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            alternatifList.clear();
+            boolean semuaTerisi = true;
+
+            for (int i = 0; i < criteriaList.size(); i++) {
+                JComboBox<ComboBoxItem> comboBox = comboBoxes.get(i);
+                ComboBoxItem selectedSubKriteria = (ComboBoxItem) comboBox.getSelectedItem();
+
+                if (selectedSubKriteria == null) {
+                    semuaTerisi = false;
+                    break;
+                }
+
+                alternatifList.add(new AlternatifModel(selectedPelanggan.getId(), selectedSubKriteria.getId()));
+            }
+
+            if (!semuaTerisi) {
+                JOptionPane.showMessageDialog(this, "Semua kriteria harus dipilih.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Hapus dulu data lama, lalu simpan ulang
+            alternatifDao.deleteBulkByPeserta(selectedPelanggan.getId());
+            int rowsUpdated = alternatifDao.create(alternatifList);
+            JOptionPane.showMessageDialog(this, rowsUpdated + " data berhasil diperbarui.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            getAllData();
+        });
+        
+        // ✅ Tombol Hapus
+        hapusButton.addActionListener(e -> {
+            ComboBoxItem selectedPelanggan = (ComboBoxItem) pelangganComboBox.getSelectedItem();
+            if (selectedPelanggan == null || selectedPelanggan.getId() == -1) {
+                JOptionPane.showMessageDialog(this, "Pilih peserta terlebih dahulu.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus semua data alternatif untuk peserta ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int rowsDeleted = alternatifDao.deleteBulkByPeserta(selectedPelanggan.getId());
+                JOptionPane.showMessageDialog(this, rowsDeleted + " data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                getAllData();
+            }
+        });
 
 
-      buttonPanel.add(simpanButton);
+     buttonPanel.add(simpanButton);
+     buttonPanel.add(editButton);
+     buttonPanel.add(hapusButton);
 
      gbc.gridx = 0;
      gbc.gridy = maxUsedRow + 1;

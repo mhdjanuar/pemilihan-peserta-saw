@@ -17,6 +17,7 @@ public class AlternatifModel {
     private int idKaryawan;
     private int idSubKriteria;
     private double normalisasi;
+    private String descSubKriteria;
 
     public AlternatifModel(int idKaryawan, int idSubKriteria) {
         this.idKaryawan = idKaryawan;
@@ -133,5 +134,19 @@ public class AlternatifModel {
      */
     public void setTypeAlternatif(String typeAlternatif) {
         this.typeAlternatif = typeAlternatif;
+    }
+    
+     /**
+     * @return the descSubKriteria
+     */
+    public String getDescSubKriteria() {
+        return descSubKriteria;
+    }
+
+    /**
+     * @param descSubKriteria the descSubKriteria to set
+     */
+    public void setDescSubKriteria(String descSubKriteria) {
+        this.descSubKriteria = descSubKriteria;
     }
 }
