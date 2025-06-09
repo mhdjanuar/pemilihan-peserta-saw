@@ -159,8 +159,8 @@ ORDER BY total_nilai DESC;]]>
 					<text><![CDATA[Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13640]]></text>
 				</staticText>
 				<image>
-					<reportElement x="40" y="25" width="50" height="50" uuid="23d5bb3f-e081-4190-9f1d-1a95495589ee"/>
-                                        <imageExpression><![CDATA[$P{PATH}+"pelatihan.jpg"]]></imageExpression>
+					<reportElement x="40" y="25" width="75" height="75" uuid="23d5bb3f-e081-4190-9f1d-1a95495589ee"/>
+                                        <imageExpression><![CDATA[$P{PATH}+"jj-love-200.png"]]></imageExpression>
 				</image>
 			</frame>
 		</band>
