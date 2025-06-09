@@ -157,36 +157,11 @@
 					<datasetRun subDataset="Peserta" uuid="dd249c7e-ad96-43d0-af83-082eaac13d5c">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="143" uuid="33f14546-2e5d-439b-b407-d61abc1ac388">
+					<jr:column width="191" uuid="2727b463-ab3d-4641-8439-cbd1cdccfc99">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="143" height="30" uuid="870c7b91-55cb-46ba-8236-06e63e3c52f2">
-									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
-								</reportElement>
-								<textElement textAlignment="Center">
-									<paragraph spacingBefore="10"/>
-								</textElement>
-								<text><![CDATA[NIK]]></text>
-							</staticText>
-						</jr:tableHeader>
-						<jr:detailCell style="Table_TD" height="30">
-							<textField>
-								<reportElement x="0" y="0" width="143" height="30" uuid="92467d1d-3fca-4524-aad3-7c2156362c55">
-									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
-								</reportElement>
-								<textElement textAlignment="Center">
-									<paragraph spacingBefore="10"/>
-								</textElement>
-								<textFieldExpression><![CDATA[$F{nik}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="143" uuid="2727b463-ab3d-4641-8439-cbd1cdccfc99">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="143" height="30" uuid="5562cc5f-8c8e-443b-9d62-90ff51252d75">
+								<reportElement x="0" y="0" width="191" height="30" uuid="5562cc5f-8c8e-443b-9d62-90ff51252d75">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -197,7 +172,7 @@
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="143" height="30" uuid="0987176e-4833-4436-852a-fbe36e75d1c9">
+								<reportElement x="0" y="0" width="191" height="30" uuid="0987176e-4833-4436-852a-fbe36e75d1c9">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -207,11 +182,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="142" uuid="0b21e6f8-7652-4acc-b435-c1c228b1873b">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					<jr:column width="190" uuid="0b21e6f8-7652-4acc-b435-c1c228b1873b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="142" height="30" uuid="8c77f3c0-d41f-4868-a2a2-1c31ae5a22a2">
+								<reportElement x="0" y="0" width="190" height="30" uuid="8c77f3c0-d41f-4868-a2a2-1c31ae5a22a2">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -222,7 +197,7 @@
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="142" height="30" uuid="e40bd1be-f9e2-4807-be67-d6a678544292">
+								<reportElement x="0" y="0" width="190" height="30" uuid="e40bd1be-f9e2-4807-be67-d6a678544292">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -232,11 +207,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="142" uuid="9415facd-e5a5-4b6b-a15a-e2db337c26ac">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					<jr:column width="189" uuid="9415facd-e5a5-4b6b-a15a-e2db337c26ac">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="142" height="30" uuid="8d0c439d-532a-44f9-9a89-8d8a3abc889a">
+								<reportElement x="0" y="0" width="189" height="30" uuid="8d0c439d-532a-44f9-9a89-8d8a3abc889a">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -247,7 +222,7 @@
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="142" height="30" uuid="a806010a-db88-485d-9f80-edc18c16166c">
+								<reportElement x="0" y="0" width="189" height="30" uuid="a806010a-db88-485d-9f80-edc18c16166c">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">

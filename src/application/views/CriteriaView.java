@@ -45,6 +45,11 @@ public class CriteriaView extends javax.swing.JPanel {
         
         // Set the table model to jTable1
         jTable1.setModel(model);
+        
+        // Sembunyikan kolom ID (kolom ke-0)
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setWidth(0);
     }
 
     /**

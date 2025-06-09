@@ -55,28 +55,34 @@ import net.sf.jasperreports.view.JasperViewer;
         public String selectedId;
 
         public void getAllData() {
-            // Ambil data karyawan dari database
-            List<KaryawanModel> karyawanList = karyawanDao.findAll();
+             // Ambil data karyawan dari database
+             List<KaryawanModel> karyawanList = karyawanDao.findAll();
 
-            // Set Model untuk JTable
-            DefaultTableModel model = new DefaultTableModel();
-            model.setColumnIdentifiers(new Object[]{
-                "ID Peseta", "Nama", "Usia", "Alamat",
-            });
+             // Set Model untuk JTable
+             DefaultTableModel model = new DefaultTableModel();
+             model.setColumnIdentifiers(new Object[]{
+                 "ID", "Nama", "Usia", "Alamat"
+             });
 
-            // Masukkan data karyawan ke dalam model JTable
-            for (KaryawanModel karyawan : karyawanList) {
-                model.addRow(new Object[]{
-                    karyawan.getId(),
-                    karyawan.getName(),
-                    karyawan.getUsia(),
-                    karyawan.getAlamat(),
-                });
-            }
+             // Masukkan data karyawan ke dalam model JTable
+             for (KaryawanModel karyawan : karyawanList) {
+                 model.addRow(new Object[]{
+                     karyawan.getId(), // disimpan tapi tidak ditampilkan
+                     karyawan.getName(),
+                     karyawan.getUsia(),
+                     karyawan.getAlamat(),
+                 });
+             }
 
-            // Set model ke JTable
-            jTable1.setModel(model);
-        }
+             // Set model ke JTable
+             jTable1.setModel(model);
+
+             // Sembunyikan kolom ID
+             jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+             jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+             jTable1.getColumnModel().getColumn(0).setWidth(0);
+         }
+
 
     
     /**
