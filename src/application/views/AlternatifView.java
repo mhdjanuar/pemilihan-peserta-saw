@@ -163,7 +163,6 @@ public class AlternatifView extends javax.swing.JPanel {
       buttonPanel.setBackground(Color.WHITE);
 
       JButton simpanButton = new JButton("Simpan");
-      JButton editButton = new JButton("Ubah");
       JButton hapusButton = new JButton("Hapus");
 
       simpanButton.addActionListener(e -> {
@@ -199,40 +198,6 @@ public class AlternatifView extends javax.swing.JPanel {
           getAllData();
       });
       
-      // ✅ Tombol Ubah
-        editButton.addActionListener(e -> {
-            ComboBoxItem selectedPelanggan = (ComboBoxItem) pelangganComboBox.getSelectedItem();
-            if (selectedPelanggan == null || selectedPelanggan.getId() == -1) {
-                JOptionPane.showMessageDialog(this, "Pilih peserta terlebih dahulu.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            alternatifList.clear();
-            boolean semuaTerisi = true;
-
-            for (int i = 0; i < criteriaList.size(); i++) {
-                JComboBox<ComboBoxItem> comboBox = comboBoxes.get(i);
-                ComboBoxItem selectedSubKriteria = (ComboBoxItem) comboBox.getSelectedItem();
-
-                if (selectedSubKriteria == null) {
-                    semuaTerisi = false;
-                    break;
-                }
-
-                alternatifList.add(new AlternatifModel(selectedPelanggan.getId(), selectedSubKriteria.getId()));
-            }
-
-            if (!semuaTerisi) {
-                JOptionPane.showMessageDialog(this, "Semua kriteria harus dipilih.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Hapus dulu data lama, lalu simpan ulang
-            alternatifDao.deleteBulkByPeserta(selectedPelanggan.getId());
-            int rowsUpdated = alternatifDao.create(alternatifList);
-            JOptionPane.showMessageDialog(this, rowsUpdated + " data berhasil diperbarui.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-            getAllData();
-        });
         
         // ✅ Tombol Hapus
         hapusButton.addActionListener(e -> {
@@ -252,7 +217,6 @@ public class AlternatifView extends javax.swing.JPanel {
 
 
      buttonPanel.add(simpanButton);
-     buttonPanel.add(editButton);
      buttonPanel.add(hapusButton);
 
      gbc.gridx = 0;
