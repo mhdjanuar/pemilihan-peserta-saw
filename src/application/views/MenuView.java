@@ -16,6 +16,11 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -25,6 +30,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -32,12 +45,23 @@ import javax.swing.UIManager;
  */
 public class MenuView extends javax.swing.JFrame {
     private UserModel loggedInUser;
+    
+     private void showSubMenu(JPanel subMenu){
+        if(subMenu.isVisible() == false){
+            subMenu.setVisible(true);
+        }else{
+            subMenu.setVisible(false);
+        }
+    }
+    
     /**
      * Creates new form MenuView
      */
     public MenuView(UserModel user) {
         this.loggedInUser = user; // Simpan data user yang login
         initComponents();
+        
+        slideMenuLaporan.setVisible(false);
         
         MainContent.add(Home);
         MainContent.repaint();
@@ -157,6 +181,13 @@ public class MenuView extends javax.swing.JFrame {
         perhitunganSPK = new javax.swing.JLabel();
         alternatif = new javax.swing.JLabel();
         perhitungan = new javax.swing.JLabel();
+        slideMenuLaporan = new javax.swing.JPanel();
+        laporanCalonPelamar = new javax.swing.JLabel();
+        laporanPrioritasKriteria = new javax.swing.JLabel();
+        laporanHasilSeleksi = new javax.swing.JLabel();
+        laporanKartapTerbaik = new javax.swing.JLabel();
+        laporanAkun = new javax.swing.JLabel();
+        cetakLaporan = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
         MainContent = new javax.swing.JPanel();
@@ -217,7 +248,7 @@ public class MenuView extends javax.swing.JFrame {
 
         profil.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         profil.setForeground(new java.awt.Color(255, 255, 255));
-        profil.setText("      DATA SUB CRITERIA");
+        profil.setText("      DATA SUB KRITERIA");
         profil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 profilMouseClicked(evt);
@@ -235,7 +266,7 @@ public class MenuView extends javax.swing.JFrame {
         perhitunganSPK.setBackground(new java.awt.Color(0, 0, 0));
         perhitunganSPK.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         perhitunganSPK.setForeground(new java.awt.Color(255, 255, 255));
-        perhitunganSPK.setText("      DATA CRITERIA");
+        perhitunganSPK.setText("      DATA KRITERIA");
         perhitunganSPK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 perhitunganSPKMouseClicked(evt);
@@ -278,6 +309,134 @@ public class MenuView extends javax.swing.JFrame {
             }
         });
 
+        slideMenuLaporan.setBackground(new java.awt.Color(168, 140, 59));
+        slideMenuLaporan.setForeground(new java.awt.Color(255, 255, 255));
+
+        laporanCalonPelamar.setBackground(new java.awt.Color(168, 140, 59));
+        laporanCalonPelamar.setForeground(new java.awt.Color(255, 255, 255));
+        laporanCalonPelamar.setText("    Laporan Data Peserta");
+        laporanCalonPelamar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        laporanCalonPelamar.setOpaque(true);
+        laporanCalonPelamar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                laporanCalonPelamarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                laporanCalonPelamarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                laporanCalonPelamarMouseExited(evt);
+            }
+        });
+
+        laporanPrioritasKriteria.setBackground(new java.awt.Color(168, 140, 59));
+        laporanPrioritasKriteria.setForeground(new java.awt.Color(255, 255, 255));
+        laporanPrioritasKriteria.setText("    Laporan Data Kriteria");
+        laporanPrioritasKriteria.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        laporanPrioritasKriteria.setOpaque(true);
+        laporanPrioritasKriteria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                laporanPrioritasKriteriaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                laporanPrioritasKriteriaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                laporanPrioritasKriteriaMouseExited(evt);
+            }
+        });
+
+        laporanHasilSeleksi.setBackground(new java.awt.Color(168, 140, 59));
+        laporanHasilSeleksi.setForeground(new java.awt.Color(255, 255, 255));
+        laporanHasilSeleksi.setText("    Laporan Data Sub Kriteria");
+        laporanHasilSeleksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        laporanHasilSeleksi.setOpaque(true);
+        laporanHasilSeleksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                laporanHasilSeleksiMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                laporanHasilSeleksiMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                laporanHasilSeleksiMouseExited(evt);
+            }
+        });
+
+        laporanKartapTerbaik.setBackground(new java.awt.Color(168, 140, 59));
+        laporanKartapTerbaik.setForeground(new java.awt.Color(255, 255, 255));
+        laporanKartapTerbaik.setText("    Laporan Data Normalisasi");
+        laporanKartapTerbaik.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        laporanKartapTerbaik.setOpaque(true);
+        laporanKartapTerbaik.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                laporanKartapTerbaikMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                laporanKartapTerbaikMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                laporanKartapTerbaikMouseExited(evt);
+            }
+        });
+
+        laporanAkun.setBackground(new java.awt.Color(168, 140, 59));
+        laporanAkun.setForeground(new java.awt.Color(255, 255, 255));
+        laporanAkun.setText("    Laporan Perankingan");
+        laporanAkun.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        laporanAkun.setOpaque(true);
+        laporanAkun.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                laporanAkunMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                laporanAkunMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                laporanAkunMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout slideMenuLaporanLayout = new javax.swing.GroupLayout(slideMenuLaporan);
+        slideMenuLaporan.setLayout(slideMenuLaporanLayout);
+        slideMenuLaporanLayout.setHorizontalGroup(
+            slideMenuLaporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(laporanPrioritasKriteria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(laporanHasilSeleksi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(laporanKartapTerbaik, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(laporanAkun, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(laporanCalonPelamar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        slideMenuLaporanLayout.setVerticalGroup(
+            slideMenuLaporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(slideMenuLaporanLayout.createSequentialGroup()
+                .addComponent(laporanCalonPelamar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(laporanPrioritasKriteria, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(laporanHasilSeleksi, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(laporanKartapTerbaik, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(laporanAkun, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        cetakLaporan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cetakLaporan.setForeground(new java.awt.Color(255, 255, 255));
+        cetakLaporan.setText("      CETAK LAPORAN");
+        cetakLaporan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cetakLaporanMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cetakLaporanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cetakLaporanMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
         SidebarLayout.setHorizontalGroup(
@@ -291,7 +450,9 @@ public class MenuView extends javax.swing.JFrame {
             .addComponent(profil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(listData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(alternatif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(perhitungan, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+            .addComponent(perhitungan, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(slideMenuLaporan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cetakLaporan, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
         );
         SidebarLayout.setVerticalGroup(
             SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,6 +469,10 @@ public class MenuView extends javax.swing.JFrame {
                 .addComponent(alternatif)
                 .addGap(18, 18, 18)
                 .addComponent(perhitungan)
+                .addGap(18, 18, 18)
+                .addComponent(cetakLaporan)
+                .addGap(14, 14, 14)
+                .addComponent(slideMenuLaporan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -371,7 +536,7 @@ public class MenuView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 105, Short.MAX_VALUE))
+                .addGap(0, 93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,6 +701,189 @@ public class MenuView extends javax.swing.JFrame {
         perhitungan.setForeground(Color.white);
     }//GEN-LAST:event_perhitunganMouseExited
 
+    private void laporanCalonPelamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanCalonPelamarMouseClicked
+        // TODO add your handling code here:
+        try {
+            String templateName = "LaporanPeserta.jrxml";
+            InputStream reportStream = ReportView.class.getResourceAsStream("/resources/reports/" + templateName);
+            JasperDesign jd = JRXmlLoader.load(reportStream);
+
+            Connection dbConnection = DatabaseUtil.getInstance().getConnection();
+
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+
+            HashMap parameter = new HashMap();
+            parameter.put("PATH","src/resources/images/");
+            
+            JasperPrint jp = JasperFillManager.fillReport(jr,parameter, dbConnection);
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException ex) {
+            Logger.getLogger(ReportView.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_laporanCalonPelamarMouseClicked
+
+    private void laporanCalonPelamarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanCalonPelamarMouseEntered
+        // TODO add your handling code here:
+        laporanCalonPelamar.setBackground(new Color(51,51,51));
+        laporanCalonPelamar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        laporanCalonPelamar.setForeground(new Color(255, 187, 0));
+    }//GEN-LAST:event_laporanCalonPelamarMouseEntered
+
+    private void laporanCalonPelamarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanCalonPelamarMouseExited
+        // TODO add your handling code here:
+        laporanCalonPelamar.setBackground(new Color(168, 140, 59));
+        laporanCalonPelamar.setForeground(Color.white);
+    }//GEN-LAST:event_laporanCalonPelamarMouseExited
+
+    private void laporanPrioritasKriteriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanPrioritasKriteriaMouseClicked
+        // TODO add your handling code here:
+        try {
+            String templateName = "LaporanDataKriteria.jrxml";
+            InputStream reportStream = ReportView.class.getResourceAsStream("/resources/reports/" + templateName);
+            JasperDesign jd = JRXmlLoader.load(reportStream);
+
+            Connection dbConnection = DatabaseUtil.getInstance().getConnection();
+
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+
+            HashMap parameter = new HashMap();
+            parameter.put("PATH","src/resources/images/");
+            
+            JasperPrint jp = JasperFillManager.fillReport(jr,parameter, dbConnection);
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException ex) {
+            Logger.getLogger(ReportView.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_laporanPrioritasKriteriaMouseClicked
+
+    private void laporanPrioritasKriteriaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanPrioritasKriteriaMouseEntered
+        // TODO add your handling code here:
+        laporanPrioritasKriteria.setBackground(new Color(51,51,51));
+        laporanPrioritasKriteria.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        laporanPrioritasKriteria.setForeground(new Color(255, 187, 0));
+    }//GEN-LAST:event_laporanPrioritasKriteriaMouseEntered
+
+    private void laporanPrioritasKriteriaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanPrioritasKriteriaMouseExited
+        // TODO add your handling code here:
+        laporanPrioritasKriteria.setBackground(new Color(168, 140, 59));
+        laporanPrioritasKriteria.setForeground(Color.white);
+    }//GEN-LAST:event_laporanPrioritasKriteriaMouseExited
+
+    private void laporanHasilSeleksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanHasilSeleksiMouseClicked
+        // TODO add your handling code here:
+        try {
+            String templateName = "LaporanSubKriteria.jrxml";
+            InputStream reportStream = ReportView.class.getResourceAsStream("/resources/reports/" + templateName);
+            JasperDesign jd = JRXmlLoader.load(reportStream);
+
+            Connection dbConnection = DatabaseUtil.getInstance().getConnection();
+
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+
+            HashMap parameter = new HashMap();
+            parameter.put("PATH","src/resources/images/");
+            
+            JasperPrint jp = JasperFillManager.fillReport(jr,parameter, dbConnection);
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException ex) {
+            Logger.getLogger(ReportView.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_laporanHasilSeleksiMouseClicked
+
+    private void laporanHasilSeleksiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanHasilSeleksiMouseEntered
+        // TODO add your handling code here:
+        laporanHasilSeleksi.setBackground(new Color(51,51,51));
+        laporanHasilSeleksi.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        laporanHasilSeleksi.setForeground(new Color(255, 187, 0));
+    }//GEN-LAST:event_laporanHasilSeleksiMouseEntered
+
+    private void laporanHasilSeleksiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanHasilSeleksiMouseExited
+        // TODO add your handling code here:
+        laporanHasilSeleksi.setBackground(new Color(168, 140, 59));
+        laporanHasilSeleksi.setForeground(Color.white);
+    }//GEN-LAST:event_laporanHasilSeleksiMouseExited
+
+    private void laporanKartapTerbaikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanKartapTerbaikMouseClicked
+        // TODO add your handling code here:
+        try {
+            String templateName = "ReportNormalisasi.jrxml";
+            InputStream reportStream = ReportView.class.getResourceAsStream("/resources/reports/" + templateName);
+            JasperDesign jd = JRXmlLoader.load(reportStream);
+
+            Connection dbConnection = DatabaseUtil.getInstance().getConnection();
+
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+
+            HashMap parameter = new HashMap();
+            parameter.put("PATH","src/resources/images/");
+            
+            JasperPrint jp = JasperFillManager.fillReport(jr,parameter, dbConnection);
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException ex) {
+            Logger.getLogger(ReportView.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_laporanKartapTerbaikMouseClicked
+
+    private void laporanKartapTerbaikMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanKartapTerbaikMouseEntered
+        // TODO add your handling code here:
+        laporanKartapTerbaik.setBackground(new Color(51,51,51));
+        laporanKartapTerbaik.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        laporanKartapTerbaik.setForeground(new Color(255, 187, 0));
+    }//GEN-LAST:event_laporanKartapTerbaikMouseEntered
+
+    private void laporanKartapTerbaikMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanKartapTerbaikMouseExited
+        // TODO add your handling code here:
+        laporanKartapTerbaik.setBackground(new Color(168, 140, 59));
+        laporanKartapTerbaik.setForeground(Color.white);
+    }//GEN-LAST:event_laporanKartapTerbaikMouseExited
+
+    private void laporanAkunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanAkunMouseClicked
+        // TODO add your handling code here:
+        try {
+            String templateName = "ReportRangking.jrxml";
+            InputStream reportStream = ReportView.class.getResourceAsStream("/resources/reports/" + templateName);
+            JasperDesign jd = JRXmlLoader.load(reportStream);
+
+            Connection dbConnection = DatabaseUtil.getInstance().getConnection();
+
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+
+            HashMap parameter = new HashMap();
+            parameter.put("PATH","src/resources/images/");
+            
+            JasperPrint jp = JasperFillManager.fillReport(jr,parameter, dbConnection);
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException ex) {
+            Logger.getLogger(ReportView.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_laporanAkunMouseClicked
+
+    private void laporanAkunMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanAkunMouseEntered
+        // TODO add your handling code here:
+        laporanAkun.setBackground(new Color(51,51,51));
+        laporanAkun.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        laporanAkun.setForeground(new Color(255, 187, 0));
+    }//GEN-LAST:event_laporanAkunMouseEntered
+
+    private void laporanAkunMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanAkunMouseExited
+        // TODO add your handling code here:
+        laporanAkun.setBackground(new Color(168, 140, 59));
+        laporanAkun.setForeground(Color.white);
+    }//GEN-LAST:event_laporanAkunMouseExited
+
+    private void cetakLaporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cetakLaporanMouseClicked
+        // TODO add your handling code here:
+        showSubMenu(slideMenuLaporan);
+    }//GEN-LAST:event_cetakLaporanMouseClicked
+
+    private void cetakLaporanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cetakLaporanMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cetakLaporanMouseEntered
+
+    private void cetakLaporanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cetakLaporanMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cetakLaporanMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -577,13 +925,20 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JPanel MainContent;
     private javax.swing.JPanel Sidebar;
     private javax.swing.JLabel alternatif;
+    private javax.swing.JLabel cetakLaporan;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel laporanAkun;
+    private javax.swing.JLabel laporanCalonPelamar;
+    private javax.swing.JLabel laporanHasilSeleksi;
+    private javax.swing.JLabel laporanKartapTerbaik;
+    private javax.swing.JLabel laporanPrioritasKriteria;
     private javax.swing.JLabel listData;
     private javax.swing.JLabel perhitungan;
     private javax.swing.JLabel perhitunganSPK;
     private javax.swing.JLabel profil;
+    private javax.swing.JPanel slideMenuLaporan;
     // End of variables declaration//GEN-END:variables
 }
