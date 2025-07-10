@@ -61,7 +61,7 @@ import net.sf.jasperreports.view.JasperViewer;
              // Set Model untuk JTable
              DefaultTableModel model = new DefaultTableModel();
              model.setColumnIdentifiers(new Object[]{
-                 "ID", "Nama", "Usia", "Alamat"
+                 "ID", "Nama", "Usia", "Alamat", "Batch", "Kursus"
              });
 
              // Masukkan data karyawan ke dalam model JTable
@@ -71,6 +71,8 @@ import net.sf.jasperreports.view.JasperViewer;
                      karyawan.getName(),
                      karyawan.getUsia(),
                      karyawan.getAlamat(),
+                     karyawan.getBatch(),
+                     karyawan.getKursus()
                  });
              }
 
@@ -82,6 +84,29 @@ import net.sf.jasperreports.view.JasperViewer;
              jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
              jTable1.getColumnModel().getColumn(0).setWidth(0);
          }
+        
+        
+        private void showKaryawanDetailDialog(String nama, String usia, String alamat, String batch, String kursus) {
+            // Buat panel
+            JPanel panel = new JPanel(new GridLayout(0, 1, 5, 5));
+            panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+            // Tambahkan komponen ke panel
+            panel.add(new JLabel("Nama     : " + nama));
+            panel.add(new JLabel("Usia     : " + usia));
+            panel.add(new JLabel("Alamat   : " + alamat));
+            panel.add(new JLabel("Batch    : " + batch));
+            panel.add(new JLabel("Kursus   : " + kursus));
+
+            // Tampilkan dialog
+            JOptionPane.showMessageDialog(
+                null,
+                panel,
+                "Detail Karyawan",
+                JOptionPane.PLAIN_MESSAGE
+            );
+        }
+
 
 
     
@@ -96,7 +121,7 @@ import net.sf.jasperreports.view.JasperViewer;
         getAllData();
         
         // Tambahkan event listener pada JTable
-        jTable1.getSelectionModel().addListSelectionListener(e -> {
+       jTable1.getSelectionModel().addListSelectionListener(e -> {
             // Cegah event dua kali saat update
             if (!e.getValueIsAdjusting() && jTable1.getSelectedRow() != -1) {
                 int selectedRow = jTable1.getSelectedRow();
@@ -105,16 +130,21 @@ import net.sf.jasperreports.view.JasperViewer;
                 String nama = jTable1.getValueAt(selectedRow, 1).toString();
                 String usia = jTable1.getValueAt(selectedRow, 2).toString();
                 String alamat = jTable1.getValueAt(selectedRow, 3).toString();
-                
+                String batch = jTable1.getValueAt(selectedRow, 4).toString();  // Tambahan batch
+                String kursus = jTable1.getValueAt(selectedRow, 5).toString(); // Tambahan kursus
+
                 this.selectedId = jTable1.getValueAt(selectedRow, 0).toString();
 
                 // Tampilkan ke form
                 txtNama.setText(nama);
                 txtUsia.setText(usia);
                 txtAddress.setText(alamat);
+                txtBatch.setText(batch);  // Set batch ke field txtBatch
+                cbKursus.setSelectedItem(kursus);  // Set kursus ke combo box
+                
+                showKaryawanDetailDialog(nama, usia, alamat, batch, kursus);
             }
         });
-
     }
     
     public void clearForm() {
@@ -152,6 +182,10 @@ import net.sf.jasperreports.view.JasperViewer;
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtBatch = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        cbKursus = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -194,6 +228,12 @@ import net.sf.jasperreports.view.JasperViewer;
             }
         });
 
+        jLabel3.setText("Masukan Batch");
+
+        jLabel4.setText("Masukan Kursus");
+
+        cbKursus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hemat", "Dasar", "Terampil", "Mahir" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -202,42 +242,59 @@ import net.sf.jasperreports.view.JasperViewer;
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(txtUsia, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                     .addComponent(txtNama)
                     .addComponent(txtAddress))
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel3)
+                        .addComponent(txtBatch)
+                        .addComponent(jLabel4)
+                        .addComponent(cbKursus, 0, 297, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)))
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUsia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbKursus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4))
+                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(28, 28, 28)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -259,9 +316,9 @@ import net.sf.jasperreports.view.JasperViewer;
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -288,28 +345,31 @@ import net.sf.jasperreports.view.JasperViewer;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Ambil nilai input dari form
+       // Ambil nilai input dari form
         String nama = txtNama.getText().trim();
         String usiaText = txtUsia.getText().trim();
         String alamat = txtAddress.getText().trim();
+        String batch = txtBatch.getText().trim();  // Tambahan untuk batch
+        String kursus = (String) cbKursus.getSelectedItem();  // Tambahan untuk kursus
 
         // Log input yang diterima
         System.out.println("Nama: " + nama);
         System.out.println("Usia: " + usiaText);
         System.out.println("Alamat: " + alamat);
-        
+        System.out.println("Batch: " + batch);
+        System.out.println("Kursus: " + kursus);
+
         // Validasi usia angka
         int usia = 0;
         try {
             usia = Integer.parseInt(usiaText);
-            // Log usia setelah berhasil dikonversi
             System.out.println("Usia valid: " + usia);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Usia harus berupa angka.");
@@ -321,25 +381,29 @@ import net.sf.jasperreports.view.JasperViewer;
         karyawan.setName(nama);
         karyawan.setUsia(usia);
         karyawan.setAlamat(alamat);
+        karyawan.setBatch(batch);
+        karyawan.setKursus(kursus);
 
         // Log data yang akan disimpan
-        System.out.println("Data Karyawan akan disimpan: ");
+        System.out.println("Data Karyawan akan disimpan:");
         System.out.println("Nama: " + karyawan.getName());
         System.out.println("Usia: " + karyawan.getUsia());
         System.out.println("Kontak: " + karyawan.getKontak());
         System.out.println("Email: " + karyawan.getEmail());
         System.out.println("Alamat: " + karyawan.getAlamat());
         System.out.println("Gender: " + karyawan.getGender());
+        System.out.println("Batch: " + karyawan.getBatch());
+        System.out.println("Kursus: " + karyawan.getKursus());
 
-//         Simpan ke DB (uncomment baris ini untuk mengaktifkan penyimpanan)
-         int result = karyawanDao.create(karyawan);
-         if (result > 0) {
-             JOptionPane.showMessageDialog(this, "Data karyawan berhasil disimpan.");
-             getAllData();
-             clearForm();
-         } else {
-             JOptionPane.showMessageDialog(this, "Gagal menyimpan data karyawan.");
-         }
+        // Simpan ke DB
+        int result = karyawanDao.create(karyawan);
+        if (result > 0) {
+            JOptionPane.showMessageDialog(this, "Data karyawan berhasil disimpan.");
+            getAllData();
+            clearForm();
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal menyimpan data karyawan.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -347,6 +411,8 @@ import net.sf.jasperreports.view.JasperViewer;
         String nama = txtNama.getText().trim();
         String usiaText = txtUsia.getText().trim();
         String alamat = txtAddress.getText().trim();
+        String batch = txtBatch.getText().trim();  // Tambahan untuk batch
+        String kursus = (String) cbKursus.getSelectedItem();  // Tambahan untuk kursus
 
         // Validasi usia angka
         int usia = 0;
@@ -363,6 +429,8 @@ import net.sf.jasperreports.view.JasperViewer;
         karyawan.setName(nama);
         karyawan.setUsia(usia);
         karyawan.setAlamat(alamat);
+        karyawan.setBatch(batch);
+        karyawan.setKursus(kursus);
 
         // Panggil fungsi update di DAO
         int result = karyawanDao.update(karyawan);
@@ -392,12 +460,15 @@ import net.sf.jasperreports.view.JasperViewer;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbKursus;
     private javax.swing.ButtonGroup gender;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
@@ -406,6 +477,7 @@ import net.sf.jasperreports.view.JasperViewer;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtBatch;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtUsia;
     // End of variables declaration//GEN-END:variables

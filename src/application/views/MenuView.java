@@ -188,6 +188,7 @@ public class MenuView extends javax.swing.JFrame {
         laporanKartapTerbaik = new javax.swing.JLabel();
         laporanAkun = new javax.swing.JLabel();
         cetakLaporan = new javax.swing.JLabel();
+        listData1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
         MainContent = new javax.swing.JPanel();
@@ -405,7 +406,9 @@ public class MenuView extends javax.swing.JFrame {
             .addComponent(laporanHasilSeleksi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(laporanKartapTerbaik, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
             .addComponent(laporanAkun, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(laporanCalonPelamar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, slideMenuLaporanLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(laporanCalonPelamar, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         slideMenuLaporanLayout.setVerticalGroup(
             slideMenuLaporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,6 +440,21 @@ public class MenuView extends javax.swing.JFrame {
             }
         });
 
+        listData1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        listData1.setForeground(new java.awt.Color(255, 255, 255));
+        listData1.setText("      PROFIL");
+        listData1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listData1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                listData1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                listData1MouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
         SidebarLayout.setHorizontalGroup(
@@ -453,12 +471,15 @@ public class MenuView extends javax.swing.JFrame {
             .addComponent(perhitungan, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
             .addComponent(slideMenuLaporan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(cetakLaporan, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(listData1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         SidebarLayout.setVerticalGroup(
             SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SidebarLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(listData1)
                 .addGap(18, 18, 18)
                 .addComponent(listData)
                 .addGap(18, 18, 18)
@@ -702,24 +723,15 @@ public class MenuView extends javax.swing.JFrame {
     }//GEN-LAST:event_perhitunganMouseExited
 
     private void laporanCalonPelamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanCalonPelamarMouseClicked
-        // TODO add your handling code here:
-        try {
-            String templateName = "LaporanPeserta.jrxml";
-            InputStream reportStream = ReportView.class.getResourceAsStream("/resources/reports/" + templateName);
-            JasperDesign jd = JRXmlLoader.load(reportStream);
+        // TODO add your handling code here: 
+        MainContent.removeAll();
+        MainContent.repaint();
+        MainContent.revalidate();
 
-            Connection dbConnection = DatabaseUtil.getInstance().getConnection();
-
-            JasperReport jr = JasperCompileManager.compileReport(jd);
-
-            HashMap parameter = new HashMap();
-            parameter.put("PATH","src/resources/images/");
-            
-            JasperPrint jp = JasperFillManager.fillReport(jr,parameter, dbConnection);
-            JasperViewer.viewReport(jp, false);
-        } catch (JRException ex) {
-            Logger.getLogger(ReportView.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        // add Panel, add panel
+        MainContent.add(new PesertaLaporanView());
+        MainContent.repaint();
+        MainContent.revalidate();
     }//GEN-LAST:event_laporanCalonPelamarMouseClicked
 
     private void laporanCalonPelamarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanCalonPelamarMouseEntered
@@ -884,6 +896,31 @@ public class MenuView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cetakLaporanMouseExited
 
+    private void listData1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listData1MouseClicked
+        // TODO add your handling code here:
+        MainContent.removeAll();
+        MainContent.repaint();
+        MainContent.revalidate();
+
+        // add Panel, add panel
+        MainContent.add(new Profil());
+        MainContent.repaint();
+        MainContent.revalidate();
+    }//GEN-LAST:event_listData1MouseClicked
+
+    private void listData1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listData1MouseEntered
+        // TODO add your handling code here:
+        listData1.setBackground(new Color(41,44,69));
+        listData1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        listData1.setForeground(new Color(255, 187, 0));
+    }//GEN-LAST:event_listData1MouseEntered
+
+    private void listData1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listData1MouseExited
+        // TODO add your handling code here:
+        listData1.setBackground(new Color(45,49,74));
+        listData1.setForeground(Color.white);
+    }//GEN-LAST:event_listData1MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -936,6 +973,7 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JLabel laporanKartapTerbaik;
     private javax.swing.JLabel laporanPrioritasKriteria;
     private javax.swing.JLabel listData;
+    private javax.swing.JLabel listData1;
     private javax.swing.JLabel perhitungan;
     private javax.swing.JLabel perhitunganSPK;
     private javax.swing.JLabel profil;

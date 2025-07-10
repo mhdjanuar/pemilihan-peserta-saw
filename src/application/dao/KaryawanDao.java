@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface KaryawanDao {
     public List<KaryawanModel> findAll();
+    public List<KaryawanModel> findBatchAndKursus(String batch, String kursus);
     public int create(KaryawanModel karyawanData);
     public int update(KaryawanModel karyawan);
     public int deleteKaryawan(int id);

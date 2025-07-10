@@ -21,6 +21,15 @@ public class UserModel {
     private String kecamatan;
     private String kelurahan;
     private int roleId; 
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     /**
      * @return the id

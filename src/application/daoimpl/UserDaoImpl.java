@@ -47,11 +47,7 @@ public class UserDaoImpl implements UserDao {
                 userFound.setName(resultSet.getString("name"));
                 userFound.setEmail(resultSet.getString("email"));
                 userFound.setPassword(resultSet.getString("password"));
-                userFound.setPhone(resultSet.getString("phone"));
-                userFound.setAddress(resultSet.getString("address"));
-                userFound.setKecamatan(resultSet.getString("kecamatan"));
-                userFound.setKelurahan(resultSet.getString("kelurahan"));
-                userFound.setRoleId(resultSet.getInt("role_id"));
+                userFound.setUsername(resultSet.getString("username"));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error saat mencari user dengan ID: " + id, e);
@@ -134,17 +130,19 @@ public class UserDaoImpl implements UserDao {
 
         return result;
     }
+    
 
     @Override
     public int update(UserModel user) {
         int result = 0;
-        String query = "UPDATE users SET username = ?, email = ? WHERE id = ?";
+        String query = "UPDATE users SET name = ?, username = ?, password = ? WHERE id = ?";
 
         try {
             pstmt = dbConnection.prepareStatement(query);
             pstmt.setString(1, user.getName());
-            pstmt.setString(2, user.getEmail());
-            pstmt.setInt(3, user.getId());
+            pstmt.setString(2, user.getUsername());
+            pstmt.setString(3, user.getPassword());
+            pstmt.setInt(4, user.getId());
 
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
