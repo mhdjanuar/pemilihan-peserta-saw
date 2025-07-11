@@ -37,7 +37,7 @@
 		<parameter name="KursusPeserta" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[SELECT 
-    p.nama AS nama_pelanggan,
+    p.nama AS nama_pelanggan, p.batch, p.kursus,
     ROUND(SUM(
         CASE 
             WHEN c.type = 'benefit' THEN (sc.jumlah_bobot / pembagi_table.pembagi) * (c.bobot / total_weight.total)
@@ -81,13 +81,22 @@ WHERE
     ($P{BatchPeserta} IS NULL OR $P{BatchPeserta} = '' OR p.batch = $P{BatchPeserta})
     AND ($P{KursusPeserta} IS NULL OR $P{KursusPeserta} = '' OR p.kursus = $P{KursusPeserta})
 
-GROUP BY p.nama
-ORDER BY total_nilai DESC;
-]]>
+GROUP BY p.nama, p.batch, p.kursus
+ORDER BY total_nilai DESC;]]>
 		</queryString>
 		<field name="nama_pelanggan" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.name" value="nama"/>
 			<property name="com.jaspersoft.studio.field.label" value="nama_pelanggan"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
+		</field>
+		<field name="batch" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="batch"/>
+			<property name="com.jaspersoft.studio.field.label" value="batch"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
+		</field>
+		<field name="kursus" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="kursus"/>
+			<property name="com.jaspersoft.studio.field.label" value="kursus"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
 		</field>
 		<field name="total_nilai" class="java.math.BigDecimal">
@@ -200,10 +209,11 @@ ORDER BY total_nilai DESC;
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="196" uuid="a7948710-4be9-4a5a-ac94-202593a65da1">
-						<jr:tableHeader style="Table_TH" height="30">
+					<jr:column width="106" uuid="a7948710-4be9-4a5a-ac94-202593a65da1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="196" height="30" uuid="9e2d8c45-9a8f-4fea-8e61-a1bd40a5bbd7">
+								<reportElement x="0" y="0" width="106" height="30" uuid="9e2d8c45-9a8f-4fea-8e61-a1bd40a5bbd7">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -214,7 +224,7 @@ ORDER BY total_nilai DESC;
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="196" height="30" uuid="cf854987-928a-4d7d-b3f0-81412608013a">
+								<reportElement x="0" y="0" width="106" height="30" uuid="cf854987-928a-4d7d-b3f0-81412608013a">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -224,10 +234,11 @@ ORDER BY total_nilai DESC;
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="196" uuid="31f2ee6d-5ae2-4243-b614-8a6a5d4a3cee">
-						<jr:tableHeader style="Table_TH" height="30">
+					<jr:column width="107" uuid="31f2ee6d-5ae2-4243-b614-8a6a5d4a3cee">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="196" height="30" uuid="d6f54534-28d0-4995-85cd-ba23ab963340">
+								<reportElement x="0" y="0" width="107" height="30" uuid="d6f54534-28d0-4995-85cd-ba23ab963340">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -238,7 +249,7 @@ ORDER BY total_nilai DESC;
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="196" height="30" uuid="ac010d17-20d7-4b84-9e4f-7214f14c2e25">
+								<reportElement x="0" y="0" width="107" height="30" uuid="ac010d17-20d7-4b84-9e4f-7214f14c2e25">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -248,10 +259,11 @@ ORDER BY total_nilai DESC;
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="195" uuid="49f8cd2a-52f2-4c94-876d-f5dc08164b83">
-						<jr:tableHeader style="Table_TH" height="30">
+					<jr:column width="133" uuid="49f8cd2a-52f2-4c94-876d-f5dc08164b83">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="195" height="30" uuid="68827649-5122-4762-897c-729b4198a33a">
+								<reportElement x="0" y="0" width="133" height="30" uuid="68827649-5122-4762-897c-729b4198a33a">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -262,13 +274,63 @@ ORDER BY total_nilai DESC;
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="195" height="30" uuid="4f3f380f-8640-42b3-b99b-c5fd7ddb67b2">
+								<reportElement x="0" y="0" width="133" height="30" uuid="4f3f380f-8640-42b3-b99b-c5fd7ddb67b2">
 									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Center">
 									<paragraph spacingBefore="10"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{peringkat}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="142" uuid="39d39bb6-79c3-4a96-b10c-a878b429e42e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="142" height="30" uuid="3216d743-ac74-41e0-af85-405dab67db4c">
+									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Center">
+									<paragraph spacingBefore="10"/>
+								</textElement>
+								<text><![CDATA[Batch]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="142" height="30" uuid="edf005ef-dd42-4b5c-9d1b-f6d2ac90cadb">
+									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Center">
+									<paragraph spacingBefore="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{batch}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="99" uuid="364237e3-c171-468d-bd71-53ab96b266aa">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="99" height="30" uuid="9725a888-9e0e-4400-86ff-7f1be0fc66c5">
+									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Center">
+									<paragraph spacingBefore="10"/>
+								</textElement>
+								<text><![CDATA[Paket]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="99" height="30" uuid="15918642-81a9-4faf-84f7-3d4404219d32">
+									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Center">
+									<paragraph spacingBefore="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{kursus}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

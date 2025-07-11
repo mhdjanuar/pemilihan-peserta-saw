@@ -9,9 +9,41 @@ package application.models;
  * @author mhdja
  */
 public class RangkingModel {
+
+   
     private String namaAlternatif;
     private double totalNilai;
     private int peringkat;
+    private String batch;
+    private String kursus;
+    
+     /**
+     * @return the batch
+     */
+    public String getBatch() {
+        return batch;
+    }
+
+    /**
+     * @param batch the batch to set
+     */
+    public void setBatch(String batch) {
+        this.batch = batch;
+    }
+
+    /**
+     * @return the kursus
+     */
+    public String getKursus() {
+        return kursus;
+    }
+
+    /**
+     * @param kursus the kursus to set
+     */
+    public void setKursus(String kursus) {
+        this.kursus = kursus;
+    }
 
     public String getNamaAlternatif() {
         return namaAlternatif;

@@ -300,7 +300,7 @@ public class SubCriteriaView extends javax.swing.JPanel {
         int result = subCriteriaDao.create(subCriteria);
         
         if (result > 0) {
-            JOptionPane.showMessageDialog(this, "Data added successfully!");
+            JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan!");
             
             getAllData();
             resetForm();

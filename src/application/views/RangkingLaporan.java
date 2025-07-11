@@ -42,13 +42,15 @@ public class RangkingLaporan extends javax.swing.JPanel {
         List<RangkingModel> rangkingList = rangkingDao.findRangking();
 
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"Nama", "Total Nilai", "Peringkat"});
+        model.setColumnIdentifiers(new Object[]{"Nama", "Total Nilai", "Peringkat", "Batch", "Paket"});
 
         for (RangkingModel rangking : rangkingList) {
             model.addRow(new Object[]{
                 rangking.getNamaAlternatif(),
                 String.format("%.4f", rangking.getTotalNilai()),
-                rangking.getPeringkat()
+                rangking.getPeringkat(),
+                rangking.getBatch(),
+                rangking.getKursus()
             });
         }
 
@@ -59,13 +61,15 @@ public class RangkingLaporan extends javax.swing.JPanel {
             List<RangkingModel> rangkingList = rangkingDao.findRangkingBatchAndKursus(batch, kursus);
 
             DefaultTableModel model = new DefaultTableModel();
-            model.setColumnIdentifiers(new Object[]{"Nama", "Total Nilai", "Peringkat"});
+            model.setColumnIdentifiers(new Object[]{"Nama", "Total Nilai", "Peringkat", "Batch", "Paket"});
 
             for (RangkingModel rangking : rangkingList) {
                 model.addRow(new Object[]{
                     rangking.getNamaAlternatif(),
                     String.format("%.4f", rangking.getTotalNilai()),
-                    rangking.getPeringkat()
+                    rangking.getPeringkat(),
+                    rangking.getBatch(),
+                    rangking.getKursus()
                 });
             }
 
@@ -105,7 +109,7 @@ public class RangkingLaporan extends javax.swing.JPanel {
 
         jLabel1.setText("Batch :");
 
-        jLabel2.setText("Kursus  :");
+        jLabel2.setText("Paket  :");
 
         cbKursus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hemat", "Dasar", "Terampil", "Mahir" }));
         cbKursus.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +172,7 @@ public class RangkingLaporan extends javax.swing.JPanel {
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );

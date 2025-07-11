@@ -24,7 +24,7 @@ public class RangkingDaoImpl implements RangkingDao {
 
         try {
             query = "SELECT " +
-                    "p.nama AS nama_pelanggan, " +
+                    "p.nama AS nama_pelanggan, p.batch, p.kursus, " +
                     "ROUND(SUM( " +
                     "  CASE " +
                     "    WHEN c.type = 'benefit' THEN (sc.jumlah_bobot / pembagi_table.pembagi) * (c.bobot / total_weight.total) " +
@@ -60,7 +60,7 @@ public class RangkingDaoImpl implements RangkingDao {
 
                     "JOIN (SELECT SUM(bobot) AS total FROM criteria) AS total_weight " +
 
-                    "GROUP BY p.nama " +
+                    "GROUP BY p.nama, p.batch, p.kursus " +
                     "ORDER BY total_nilai DESC;";
 
             pstmt = dbConnection.prepareStatement(query);
@@ -71,6 +71,8 @@ public class RangkingDaoImpl implements RangkingDao {
                 rangking.setNamaAlternatif(resultSet.getString("nama_pelanggan"));
                 rangking.setTotalNilai(resultSet.getDouble("total_nilai"));
                 rangking.setPeringkat(resultSet.getInt("peringkat"));
+                rangking.setBatch(resultSet.getString("batch"));
+                rangking.setKursus(resultSet.getString("kursus"));
                 rangkingList.add(rangking);
             }
 
@@ -89,7 +91,7 @@ public class RangkingDaoImpl implements RangkingDao {
 
         try {
             query = "SELECT " +
-                    "p.nama AS nama_pelanggan, " +
+                    "p.nama AS nama_pelanggan, p.batch, p.kursus, " +
                     "ROUND(SUM( " +
                     "  CASE " +
                     "    WHEN c.type = 'benefit' THEN (sc.jumlah_bobot / pembagi_table.pembagi) * (c.bobot / total_weight.total) " +
@@ -136,7 +138,7 @@ public class RangkingDaoImpl implements RangkingDao {
                 query += (hasWhere ? "AND " : "WHERE ") + "p.kursus = ? ";
             }
 
-            query += "GROUP BY p.nama ORDER BY total_nilai DESC;";
+            query += "GROUP BY p.nama, p.batch, p.kursus ORDER BY total_nilai DESC;";
 
             pstmt = dbConnection.prepareStatement(query);
 
@@ -155,6 +157,8 @@ public class RangkingDaoImpl implements RangkingDao {
                 rangking.setNamaAlternatif(resultSet.getString("nama_pelanggan"));
                 rangking.setTotalNilai(resultSet.getDouble("total_nilai"));
                 rangking.setPeringkat(resultSet.getInt("peringkat"));
+                rangking.setBatch(resultSet.getString("batch"));
+                rangking.setKursus(resultSet.getString("kursus"));
                 rangkingList.add(rangking);
             }
 
