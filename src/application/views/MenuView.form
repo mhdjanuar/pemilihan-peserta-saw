@@ -81,7 +81,7 @@
               <Component id="Sidebar" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="130" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="152" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -137,7 +137,7 @@
                       <Component id="cetakLaporan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="slideMenuLaporan" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="860" max="32767" attributes="0"/>
                       <Component id="jLabel3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -184,7 +184,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="      DATA SUB KRITERIA"/>
+                <Property name="text" type="java.lang.String" value="      PENILAIAN KRITERIA"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="profilMouseClicked"/>
@@ -267,10 +267,7 @@
                       <Component id="laporanHasilSeleksi" alignment="1" max="32767" attributes="0"/>
                       <Component id="laporanKartapTerbaik" alignment="0" pref="293" max="32767" attributes="0"/>
                       <Component id="laporanAkun" alignment="1" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="laporanCalonPelamar" min="-2" pref="261" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="laporanCalonPelamar" alignment="1" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -379,7 +376,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="    Laporan Perankingan"/>
+                    <Property name="text" type="java.lang.String" value="    Laporan Peserta Terbaik"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
                     </Property>

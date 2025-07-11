@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public UserModel findOneByUsernameAndPassword(String email, String password) {
         try {
-            query = "SELECT * FROM users WHERE email=? and password=?";
+            query = "SELECT * FROM users WHERE username=? and password=?";
  
             pstmt = dbConnection.prepareStatement(query);
             pstmt.setString(1, email);
@@ -71,8 +71,33 @@ public class UserDaoImpl implements UserDao {
             if(resultSet.next()){
                 UserModel userFound = new UserModel();
                 userFound.setId(resultSet.getInt("id"));
-                userFound.setEmail(resultSet.getString("email"));
+                userFound.setUsername(resultSet.getString("username"));
                 userFound.setPassword(resultSet.getString("password"));
+                return userFound;
+            }
+            return null;
+	} catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            closeStatement();
+        }
+    }
+    
+    @Override
+    public UserModel findOneByUsername(String username) {
+        try {
+            query = "SELECT * FROM users WHERE username=? LIMIT 1";
+ 
+            pstmt = dbConnection.prepareStatement(query);
+            pstmt.setString(1, username);
+            
+            resultSet = pstmt.executeQuery();
+            if(resultSet.next()){
+                UserModel userFound = new UserModel();
+                userFound.setId(resultSet.getInt("id"));
+                userFound.setUsername(resultSet.getString("username"));
+                userFound.setName(resultSet.getString("name"));
                 return userFound;
             }
             return null;

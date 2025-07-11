@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface RangkingDao {
     List<RangkingModel> findRangking();
+    List<RangkingModel> findRangkingBatchAndKursus(String batch, String kursus);
 }

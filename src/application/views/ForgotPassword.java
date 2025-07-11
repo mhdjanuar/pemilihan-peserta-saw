@@ -4,47 +4,45 @@
  */
 package application.views;
 
+import application.dao.UserDao;
 import application.daoimpl.UserDaoImpl;
 import application.models.UserModel;
+import application.utils.DatabaseUtil;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import application.dao.UserDao;
-import application.utils.DatabaseUtil;
+import javax.swing.UIManager;
 
 /**
  *
- * @author yusuf
+ * @author mhdja
  */
-public class LoginView extends javax.swing.JFrame {
+public class ForgotPassword extends javax.swing.JFrame {
     private final UserDao userDao;
 
     /**
-     * Creates new form LoginFrame
+     * Creates new form ForgotPassword
      */
-    public LoginView() {
+    public ForgotPassword() {
         initComponents();
+        
         this.userDao = new UserDaoImpl();
     }
     
-    @Override
-    public void dispose() {
-        // Your custom disposal logic here
-        System.out.println("Disposing resources...");
-        super.dispose();
-    }
-    
-    public void clearForm(){
+     public void clearForm(){
         textFieldUsername.setText("");
         textFieldPassword.setText("");
         textFieldUsername.requestFocus();
     }
     
     public void start(){
-        JFrame frame = new LoginView();
-        frame.setTitle("Login");
-//        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        JFrame frame = new ForgotPassword();
+        frame.setTitle("Halaman Lupa Password");
+
+        UIManager.put("OptionPane.yesButtonText", "Ya");
+        UIManager.put("OptionPane.noButtonText", "Tidak");
+
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.addWindowListener(new WindowAdapter() {
@@ -54,8 +52,8 @@ public class LoginView extends javax.swing.JFrame {
 
                 int result = JOptionPane.showConfirmDialog(
                     frame,
-                    "Are you sure you want to exit the application?",
-                    "Exit Application",
+                    "Apakah Anda yakin ingin keluar dari aplikasi?",
+                    "Keluar dari Aplikasi",
                     JOptionPane.YES_NO_OPTION);
 
                 if (result == JOptionPane.YES_OPTION){
@@ -66,8 +64,9 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
         // TODO add your custom frame code here:
-
+        
         frame.setVisible( true );
+        textFieldUsername.requestFocus();
     }
 
     /**
@@ -79,17 +78,21 @@ public class LoginView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonLogin = new javax.swing.JButton();
-        textFieldUsername = new javax.swing.JTextField();
-        textFieldPassword = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        textFieldUsername = new javax.swing.JTextField();
+        textFieldPassword = new javax.swing.JTextField();
+        buttonLogin = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         buttonLogin1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        buttonLogin.setText("Login");
+        jLabel1.setText("Username");
+
+        jLabel2.setText("Password Baru");
+
+        buttonLogin.setText("Simpan");
         buttonLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonLoginMouseClicked(evt);
@@ -101,13 +104,9 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Username");
-
-        jLabel2.setText("Password");
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/jj-love-200.png"))); // NOI18N
 
-        buttonLogin1.setText("Lupa Password");
+        buttonLogin1.setText("Kembali");
         buttonLogin1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonLogin1MouseClicked(evt);
@@ -124,16 +123,13 @@ public class LoginView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
-                        .addGap(36, 36, 36)
+                        .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(buttonLogin)
@@ -141,22 +137,26 @@ public class LoginView extends javax.swing.JFrame {
                                 .addComponent(buttonLogin1))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(textFieldPassword)
-                                .addComponent(textFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(111, Short.MAX_VALUE))
+                                .addComponent(textFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(91, 91, 91))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(135, 135, 135))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addComponent(textFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonLogin)
@@ -169,28 +169,47 @@ public class LoginView extends javax.swing.JFrame {
 
     private void buttonLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLoginMouseClicked
         // TODO add your handling code here:
-        String username = textFieldUsername.getText();
-        String password = textFieldPassword.getText();
-       
-        UserModel userFound = userDao.findOneByUsernameAndPassword(username, password);
-        if(userFound == null) {
-            JOptionPane.showMessageDialog(null, "Username atau Password Anda Salah");  
-            this.clearForm();
-        } else {
-            if(userFound.authenticate(username, password) == true){
-                this.clearForm();
-                JOptionPane.showMessageDialog(null, "Berhasil Masuk"); 
-                this.dispose();
-                new MenuView(userFound).start(userFound);
-//                new MainView().start();
-            }else{
-                JOptionPane.showMessageDialog(null, "Username atau Password Anda Salah");
-            }
-        }
     }//GEN-LAST:event_buttonLoginMouseClicked
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         // TODO add your handling code here:
+        String username = textFieldUsername.getText();
+       
+        UserModel userFound = userDao.findOneByUsername(username);
+        
+        if(userFound == null) {
+            JOptionPane.showMessageDialog(null, "Username tidak terdaftar di sistem");  
+            this.clearForm();
+        } else {
+             String password = textFieldPassword.getText();
+            
+             if (password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Semua field harus diisi.");
+                return;
+             }
+
+            try {
+                // Set ke model
+                UserModel user = new UserModel();
+                user.setId(userFound.getId());
+                user.setName(userFound.getName());
+                user.setUsername(username);
+                user.setPassword(password);
+
+                // Proses update
+                int result = userDao.update(user);
+                if (result > 0) {
+                    JOptionPane.showMessageDialog(this, "Password berhasil di ubah");
+                    this.clearForm();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Gagal memperbarui password.");
+                    this.clearForm();
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "ID harus berupa angka.");
+            }
+        }
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void buttonLogin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogin1MouseClicked
@@ -200,7 +219,7 @@ public class LoginView extends javax.swing.JFrame {
     private void buttonLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogin1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new ForgotPassword().start();
+        new LoginView().start();
     }//GEN-LAST:event_buttonLogin1ActionPerformed
 
     /**
@@ -220,23 +239,20 @@ public class LoginView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginView().setVisible(true);
+                new ForgotPassword().setVisible(true);
             }
         });
     }

@@ -249,7 +249,7 @@ public class MenuView extends javax.swing.JFrame {
 
         profil.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         profil.setForeground(new java.awt.Color(255, 255, 255));
-        profil.setText("      DATA SUB KRITERIA");
+        profil.setText("      PENILAIAN KRITERIA");
         profil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 profilMouseClicked(evt);
@@ -383,7 +383,7 @@ public class MenuView extends javax.swing.JFrame {
 
         laporanAkun.setBackground(new java.awt.Color(168, 140, 59));
         laporanAkun.setForeground(new java.awt.Color(255, 255, 255));
-        laporanAkun.setText("    Laporan Perankingan");
+        laporanAkun.setText("    Laporan Peserta Terbaik");
         laporanAkun.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         laporanAkun.setOpaque(true);
         laporanAkun.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -406,9 +406,7 @@ public class MenuView extends javax.swing.JFrame {
             .addComponent(laporanHasilSeleksi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(laporanKartapTerbaik, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
             .addComponent(laporanAkun, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, slideMenuLaporanLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(laporanCalonPelamar, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(laporanCalonPelamar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         slideMenuLaporanLayout.setVerticalGroup(
             slideMenuLaporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,7 +492,7 @@ public class MenuView extends javax.swing.JFrame {
                 .addComponent(cetakLaporan)
                 .addGap(14, 14, 14)
                 .addComponent(slideMenuLaporan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 860, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -548,7 +546,7 @@ public class MenuView extends javax.swing.JFrame {
             .addComponent(Sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 130, Short.MAX_VALUE))
+                .addGap(0, 152, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -851,23 +849,14 @@ public class MenuView extends javax.swing.JFrame {
 
     private void laporanAkunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanAkunMouseClicked
         // TODO add your handling code here:
-        try {
-            String templateName = "ReportRangking.jrxml";
-            InputStream reportStream = ReportView.class.getResourceAsStream("/resources/reports/" + templateName);
-            JasperDesign jd = JRXmlLoader.load(reportStream);
+        MainContent.removeAll();
+        MainContent.repaint();
+        MainContent.revalidate();
 
-            Connection dbConnection = DatabaseUtil.getInstance().getConnection();
-
-            JasperReport jr = JasperCompileManager.compileReport(jd);
-
-            HashMap parameter = new HashMap();
-            parameter.put("PATH","src/resources/images/");
-            
-            JasperPrint jp = JasperFillManager.fillReport(jr,parameter, dbConnection);
-            JasperViewer.viewReport(jp, false);
-        } catch (JRException ex) {
-            Logger.getLogger(ReportView.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        // add Panel, add panel
+        MainContent.add(new RangkingLaporan());
+        MainContent.repaint();
+        MainContent.revalidate();
     }//GEN-LAST:event_laporanAkunMouseClicked
 
     private void laporanAkunMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanAkunMouseEntered

@@ -158,7 +158,7 @@ public class UserModel {
     }
 
     public boolean authenticate(String username, String password) {
-        return this.email.equals(username) && this.password.equals(password);
+        return this.username.equals(username) && this.password.equals(password);
     }
     
 }

@@ -18,6 +18,8 @@ public interface UserDao {
     
     public UserModel findOneByUsernameAndPassword(String username, String Password);
     
+    public UserModel findOneByUsername(String username);
+    
     public List<UserModel> findAll();
     
     public List<UserModel> findByName(String name, List<Integer> roleId);
