@@ -53,7 +53,7 @@ public class AlternatifView extends javax.swing.JPanel {
 
         // Membuat model untuk jTable1 dengan kolom-kolom yang sesuai
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"Nama Peserta", "Nama Kriteria", "Nama Sub Kriteria", "Bobot Alternatif"}); // Menentukan nama kolom
+        model.setColumnIdentifiers(new Object[]{"Nama Peserta", "Nama Kriteria", "Penilaian Kriteria", "Bobot Alternatif"}); // Menentukan nama kolom
 
         // Mengisi model dengan data dari alternatifList
         for (AlternatifModel alternatif : alternatifList) {

@@ -148,7 +148,7 @@ import net.sf.jasperreports.view.JasperViewer;
             JOptionPane.showMessageDialog(
                 null,
                 panel,
-                "Detail Karyawan",
+                "Detail Peserta",
                 JOptionPane.PLAIN_MESSAGE
             );
         }

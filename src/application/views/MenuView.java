@@ -349,7 +349,7 @@ public class MenuView extends javax.swing.JFrame {
 
         laporanHasilSeleksi.setBackground(new java.awt.Color(168, 140, 59));
         laporanHasilSeleksi.setForeground(new java.awt.Color(255, 255, 255));
-        laporanHasilSeleksi.setText("    Laporan Data Sub Kriteria");
+        laporanHasilSeleksi.setText("    Laporan Penilaian Kriteria");
         laporanHasilSeleksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         laporanHasilSeleksi.setOpaque(true);
         laporanHasilSeleksi.addMouseListener(new java.awt.event.MouseAdapter() {

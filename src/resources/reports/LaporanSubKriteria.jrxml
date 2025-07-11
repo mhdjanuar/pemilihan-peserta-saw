@@ -133,7 +133,7 @@
 				<textElement textAlignment="Center">
 					<font size="20" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Laporan Data Sub Kriteria]]></text>
+				<text><![CDATA[Laporan Penilaian Kriteria]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

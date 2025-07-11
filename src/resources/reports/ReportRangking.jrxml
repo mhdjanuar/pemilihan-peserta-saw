@@ -184,7 +184,7 @@ ORDER BY total_nilai DESC;]]>
 				<textElement textAlignment="Center">
 					<font size="20" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Laporan Rangking]]></text>
+				<text><![CDATA[Laporan Peserta Terbaik]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
