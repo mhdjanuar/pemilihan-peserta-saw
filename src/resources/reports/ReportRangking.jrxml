@@ -150,9 +150,16 @@ ORDER BY total_nilai DESC;]]>
 	<pageHeader>
 		<band height="80" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="100" forecolor="#FFFCFC" backcolor="#080808" uuid="7e98f9c9-b4bc-4798-ae96-2583a5e9a307"/>
+				<reportElement mode="Opaque" x="-20" y="-30" width="595" height="110" forecolor="#FFFCFC" backcolor="#FFFFFF" uuid="342e97e8-1c75-459e-af78-36180d6d006e"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<staticText>
-					<reportElement x="110" y="10" width="350" height="30" forecolor="#FCFAFA" uuid="6785d7e6-6316-4b0c-9d80-c0b775ac6a42"/>
+					<reportElement x="110" y="21" width="350" height="30" forecolor="#000000" uuid="f99744a1-56cd-4f60-9389-a73b3072abb2"/>
 					<textElement textAlignment="Center">
 						<font fontName="Times New Roman" size="20" isBold="true"/>
 						<paragraph lineSpacingSize="1.0"/>
@@ -160,14 +167,14 @@ ORDER BY total_nilai DESC;]]>
 					<text><![CDATA[JULIANA JAYA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="142" y="40" width="310" height="20" forecolor="#FFFAFA" uuid="e702c6a7-60b3-455d-a624-de057627a8d4"/>
+					<reportElement x="142" y="51" width="310" height="20" forecolor="#000000" uuid="8f4c8fe0-8216-4a97-9060-9c59ce5ab0fa"/>
 					<textElement>
 						<font fontName="Times New Roman"/>
 					</textElement>
 					<text><![CDATA[Jl. Raya Bogor Cililitan No.20, RT.1/RW.15, Cililitan, Kec. Kramat jati]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="153" y="60" width="267" height="20" forecolor="#FCFAFA" uuid="91ee8aa4-c74c-4263-a8bb-122ef1c37633"/>
+					<reportElement x="153" y="71" width="267" height="20" forecolor="#000000" uuid="d328ae76-e696-4871-931b-5648e5e00920"/>
 					<text><![CDATA[Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13640]]></text>
 				</staticText>
 				<image>
@@ -370,13 +377,13 @@ ORDER BY total_nilai DESC;]]>
 				<text><![CDATA[ Sri Mulyati]]></text>
 			</staticText>
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="0" y="150" width="90" height="19" uuid="f23b9681-bac7-46a4-8734-9de3082e7110">
+				<reportElement x="0" y="135" width="180" height="19" uuid="f23b9681-bac7-46a4-8734-9de3082e7110">
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right">
 					<paragraph rightIndent="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("HH:mm:ss", new java.util.Locale("id", "ID")).format(new java.util.Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd MMMM yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new java.util.Date())]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
