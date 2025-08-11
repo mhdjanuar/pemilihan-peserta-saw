@@ -263,13 +263,13 @@
 				<text><![CDATA[ Sri Mulyati]]></text>
 			</staticText>
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="0" y="135" width="180" height="19" uuid="f23b9681-bac7-46a4-8734-9de3082e7110">
+				<reportElement x="0" y="135" width="220" height="19" uuid="f23b9681-bac7-46a4-8734-9de3082e7110">
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right">
 					<paragraph rightIndent="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd MMMM yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new java.util.Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Tanggal Cetak :" + new java.text.SimpleDateFormat("dd MMMM yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new java.util.Date())]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
